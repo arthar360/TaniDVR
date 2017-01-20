@@ -1,0 +1,27 @@
+-----------------------------------------------------
+
+* SYSTEM AND BUILD REQUIREMENTS
+
+- Un*x-based OS; compliant enough to POSIX:2001
+  In practice, modern *BSD variants and Linux should do.
+
+- C99 compliant (compliant enough) C build environment.
+
+-----------------------------------------------------
+
+* COMPILATION/INSTALL:
+
+TaniDVR uses GNU Autotools, just follow the standard
+procedure with:
+
+$ cd tanidvr-X.X.X/
+$ ./configure
+$ make
+
+To install:
+$ make install
+
+-----------------------------------------------------
+
+(text ends here)
+

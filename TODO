@@ -1,0 +1,41 @@
+
+Some features under more immediate consideration:
+
+- Add support for multi-camera modes (as supported
+  by the DVR itself).
+
+- Add timer option for video recording.
+  Currently it starts recording and stays like that.
+
+
+
+Other missing features (not in the priority list):
+
+- Implement a way to collect the videos stored
+  on the DVR, for backup purposes.
+
+- Implement support for camera control (pan/tilt/zoom).
+  Perhaps interfacing that with a local generic joystick?
+
+- Suport for audio capture.
+
+- User account management.
+
+- Support for other exoteric features such as firmware
+  upgrade.
+
+- Support for voice chat.
+
+- Add DVR clock setup.
+  This would allow updating the DVR internal clock
+  from an external host, instead of using the DVR's
+  own interface or its NTP support.
+
+- Support snapshots (JPEG pictures).
+  So we may interface TaniDVR with a webserver
+  and be able to check the cameras with a generic
+  web browser.
+  Nowadays, with HTML5 video, this option is not
+  that useful.
+
+

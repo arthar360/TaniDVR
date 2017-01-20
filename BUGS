@@ -1,0 +1,24 @@
+
+- Certain DVRs generate broken H.264 streams which
+  may play with minor artifacts and/or may make the
+  player output warnings.
+  This is NOT a TaniDVR bug.
+  Updating the DVR firmware may (or may not) fix
+  this issue.
+
+- TaniDVR assumes having total (admin) access to the DVR resources,
+  thus it does not check if the user has the necessary privileges.
+  Certain operations may break if a non-admin user is used to log in
+  and such user has no access to video monitoring.
+
+- Some (firmware >= 3.x?) DVRs output the video stream as simple MPEG-4
+  (referred as "raw H.264" by TaniDVR) instead of using the
+  "classic" DHAV container.
+  The internal conversion routines to MKV are still incomplete and
+  render barely playable video.
+  The MPEG-4 stream itself appears to be unstandard and/or broken,
+  so while playing directly that (with '-n0' option) may provide
+  slight improvement, the resulting video displays with constant hiccups
+  and temporary freezes.
+
+

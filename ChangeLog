@@ -1,0 +1,125 @@
+2015-03-09
+	Version 1.4.1
+	- Fixed login failure bug, which affected
+	  certain OSes and prevented access to a DVR/IP camera.
+	- Eliminates flood of "Unknown DHAV frame type received: f1"
+	  messages, which affected some devices.
+
+2014-12-23
+	Version 1.4.0
+	- Extensive fixes and changes in the DVR protocol
+	  routines, including new workarounds for protocol
+	  version-dependent firmware bugs/changes.
+	  Some DVRs which did not work,
+	  possibly all with >=3.x firmware, will do now.
+	- Some DVRs output a simple MPEG stream instead
+	  of DHAV. Added partial support for that:
+	  videos will play, albeit with some problems.
+	- Removed support for channel parameter in
+	  dhav2mkv, due to lack of practical use.
+
+2014-09-04
+	Version 1.3.0
+	- Implemented support for DVR protocol extensions,
+	  allowing access to channels beyond the 16th.
+	- Workarounded firmware bug in DVRs sending wrong
+	  channel ID, some channels were not accessible
+	  in certain DVRs.
+	- Now checks whether specified channel number is
+	  within the valid range of actual target DVR.
+	- dhav2mkv no longer requires specifying the
+	  channel ('-c' option).
+	- Added information to -m0 dump:
+	  split screen (available modes).
+
+2013-03-20
+	Version 1.2.0
+	- Fixed DHAV parser bugs. Improved compatibility with
+	  certain devices.
+	- Added heuristic aspect-ratio calculation and output to MKV.
+	  Aspect-ratio was previously hard-coded to 4:3.
+	- Improved heuristic NTSC vs PAL detection for DHAV streams.
+	- Debug (compile-time) mode now outputs DHAV headers.
+	- Now a warning is issued when unknown DHAV header types
+	  are found.
+	- Manual network port specification did not work. Fixed.
+	- Connection initialization was too sensitive to network
+	  latency. Fixed.
+	- Added new option: --net-protocol-dialect
+	- Added information to -m0 dump:
+	  device chipset, wireless alarm and DVR access URL.
+
+2012-07-02
+	Version 1.1.0
+	- Added standalone dhav2mkv tool, which converts
+	  DHAV files/streams to MKV files/streams.
+	- Some janitorial work on debug (-DDEBUG) code.
+	- Corrupted DHAV streams were not properly resynced, resulting
+	  in "No DHAV header. Skipping garbage..." looping forever.
+	  Fixed.
+
+2012-03-04
+	Version 1.0.0
+	- Adopted a multi-process, fully buffered, architecture
+	  for stream processing.
+	  It is now far, far more robust to DVR/network instabilities.
+	  Also robust against local IO load spikes, preventing
+	  loss of frames in such cases.
+	  Now able to enforce timeouts immediately.
+	  Allows a CONTINUOUS local video stream regardless DVR
+	  disconnections. Connection breaks are resumed almost
+	  instantaneously (provided the DVR/network are still
+	  working, otherwise keep retrying). Now it is possible
+	  to stream continuous live video for days, months long.
+	- Implemented corrupted data detection and recovery
+	  for video stream (at container level, not at codec
+	  level).
+	- Reimplemented timestamp correction routines.
+	  Now far more robust, detects and correct most -
+	  possibly all - time anomalities present in the video stream,
+	  due to DVR bugs.
+	- Added support for NTSC video streams with exact 60.0 Hz
+	  field rate (not the usual 59.94 Hz).
+	  See "-x" option.
+	- Fixed MKV output bugs: lack of resolution and
+	  frame rate information.
+	- MKV output uses micro-second resolution now (it used to
+	  be mili-seconds).
+	- Added routine for NTSC/PAL detection from the stream
+	  data. DVR self-reported system is not used.
+	- Reimplemented the keep-alive routine. Now far less
+	  aggressive and yet far more effective.
+	- Adopted GNU Autotools as build system.
+	- TaniDVR did not stop execution is there was an I/O error
+	  while writting data (disk error, stdout broken). Fixed.
+	- General code reorganization and cleanup.
+	- Other minor features/bugfixes.
+
+2011-01-15
+	Version 0.0.3
+	- Implemented support for sub-channels (auxiliary streams).
+	- Implemented DHAV demux and MKV mux properly.
+	  Now video frames fragmented across the DVR protocol
+	  packets are correctly processed.
+	  Frame timing is based on the timestamps provided by
+	  the DVR with jitter correction. NTSC timing is correct.
+	  Now TaniDVR waits for the first I-frame to come before
+	  sending video data (no more initial video garbage
+	  which happened in the primary sub-channel).
+	  Streams with audio no longer generate corrupted video
+	  data (though audio is not currently supported, audio
+	  data is simply discarded).
+	- Fixed several bugs related to network errors, so now
+	  TaniDVR won't simply lockup (or crash) when connection
+	  goes down, or when the DVR "decides" to no longer send data.
+	- Changed 'keep-alive' to the same method as used
+	  by the 'official' DVR client software.
+	  Also changed that to a more aggressive timing, so
+	  the DVR will not stop responding so often.
+	- Network inactivity timeout is reduced,
+	  fixed to 30 seconds now.
+
+2011-01-05
+	Version 0.0.2
+	First public release.
+
